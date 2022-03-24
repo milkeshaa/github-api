@@ -27,7 +27,6 @@ class Command
             'data' => [ 'name' => $repo_name ],
             'url' => $_ENV['CREATE_URL']
         ];
-        var_dump($_ENV['CREATE_URL']);
         $response = self::send_request(HttpMethods::POST->value, $data);
         return self::prepare_response($response);
     }
