@@ -21,10 +21,24 @@ trait HttpRequest
                 'Content-Type: application/json',
                 'Accept: application/vnd.github.v3+json',
                 'Authorization: token ' . $_ENV['GITHUB_PERSONAL_TOKEN'],
-                'User-Agent: Chrome/91.0.4472.114',
+                'User-Agent: Simple-CLI',
         ));
 
         return $curl;
+    }
+
+    private static function submit($curl): array
+    {
+        // Submit the request
+        $result = curl_exec($curl);
+        // Handle cURL error
+        if (!$result && ($curl_error = curl_error($curl))) {
+            die("cURL error: $curl_error\n");
+        }
+        // Close cURL session handle
+        curl_close($curl);
+        $http_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+        return ['result' => $result, 'code' => $http_code];
     }
 
     private static function post(array $data): array
@@ -45,17 +59,9 @@ trait HttpRequest
         return self::submit($curl);
     }
 
-    private static function submit($curl): array
+    private static function get(array $data): array
     {
-        // Submit the request
-        $result = curl_exec($curl);
-        // Handle cURL error
-        if (!$result && ($curl_error = curl_error($curl))) {
-            die("cURL error: $curl_error\n");
-        }
-        // Close cURL session handle
-        curl_close($curl);
-        $http_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
-        return ['result' => $result, 'code' => $http_code];
+        $curl = self::init_curl($data['url']);
+        return self::submit($curl);
     }
 }
