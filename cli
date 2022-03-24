@@ -1,0 +1,44 @@
+#!/usr/bin/env php
+<?php
+
+/*
+|--------------------------------------------------------------------------
+| Register The Auto Loader
+|--------------------------------------------------------------------------
+|
+| Composer provides a convenient, automatically generated class loader
+| for our application. We just need to utilize it! We'll require it
+| into the script here so that we do not have to worry about the
+| loading of any of our classes manually. It's great to relax.
+|
+*/
+require __DIR__.'/vendor/autoload.php';
+
+use App\Commands\Command as CLI;
+
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+try {
+    $dotenv->safeLoad();
+} catch (Exception $exception) {
+    die($exception);
+}
+
+$options = getopt(null, ["action:", "name:"]);
+if (!$options) {
+    die("Options for CLI are required.\n");
+}
+if (!isset($options['action'])) {
+    die("Action option is required. E.g. -- --action=any_action\n");
+}
+if (!isset($options['name'])) {
+    die("Name option is required. E.g. -- --name=repo-name\n");
+}
+
+$action = $options["action"];
+try {
+    $response = CLI::$action($options["name"]);
+} catch (Exception $exception) {
+    die($exception);
+}
+var_dump($response);
+
