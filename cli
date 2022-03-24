@@ -13,15 +13,9 @@
 |
 */
 require __DIR__.'/vendor/autoload.php';
+require __DIR__ . '/bootstrap.php';
 
 use App\Commands\Command as CLI;
-
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
-try {
-    $dotenv->safeLoad();
-} catch (Exception $exception) {
-    die($exception);
-}
 
 $options = getopt(null, ["action:", "name:"]);
 if (!$options) {
@@ -40,5 +34,8 @@ try {
 } catch (Exception $exception) {
     die($exception);
 }
+
+echo "------CLI command results------\n";
 var_dump($response);
+echo "\n";
 

@@ -11,6 +11,16 @@ class Command
     use HttpRequest;
     use Response;
 
+    public static function list_repositories(string $username): string
+    {
+        $data = [
+            'url' => $_ENV['USERS_URL'] . "$username/repos"
+        ];
+        $response = self::send_request(HttpMethods::GET->value, $data);
+        $response['result'] = json_encode($response['result']);
+        return self::prepare_response($response);
+    }
+
     public static function create_repository(string $repo_name): string
     {
         $data = [
