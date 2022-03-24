@@ -1,0 +1,16 @@
+{
+    "name": "milkesha/github-api",
+    "description": "PHP/GitHub API Challenge",
+    "autoload": {
+        "psr-4": {
+            "Milkesha\\GithubApi\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "AMilkevich",
+            "email": "alexandrsmilkevich@gmail.com"
+        }
+    ],
+    "require": {}
+}
