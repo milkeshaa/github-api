@@ -27,6 +27,12 @@ $options = getopt(null, ["action:", "name:"]);
 if (!$options) {
     die("Options for CLI are required.\n");
 }
+if (!isset($options['action'])) {
+    die("Action option is required. E.g. -- --action=any_action\n");
+}
+if (!isset($options['name'])) {
+    die("Name option is required. E.g. -- --name=repo-name\n");
+}
 
 $action = $options["action"];
 try {

@@ -2,7 +2,8 @@
     "name": "milkesha/github-api",
     "description": "PHP/GitHub API Challenge",
     "scripts": {
-        "create-repo": "@php cli --action=create_repository"
+        "create-repo": "@php cli --action=create_repository",
+        "delete-repo": "@php cli --action=delete_repository"
     },
     "scripts-descriptions": {
         "create-repo": "Creates github repository"
