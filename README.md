@@ -28,3 +28,4 @@ If you want to filter by username try this URL: http://localhost:8080/github/rep
 ```sh
         $ docker-compose exec php-fpm composer test
 ```
++ You can try navigate to any other URL (even root) to see beautiful 404 page :) 
