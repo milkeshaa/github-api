@@ -3,7 +3,8 @@
     "description": "PHP/GitHub API Challenge",
     "scripts": {
         "create-repo": "@php cli --action=create_repository",
-        "delete-repo": "@php cli --action=delete_repository"
+        "delete-repo": "@php cli --action=delete_repository",
+        "test": "@php test"
     },
     "scripts-descriptions": {
         "create-repo": "Creates github repository"
@@ -14,7 +15,8 @@
             "App\\Commands\\": "app/commands/",
             "App\\Enums\\": "app/enums/",
             "App\\Traits\\": "app/traits/",
-            "App\\Controllers\\": "app/controllers"
+            "App\\Controllers\\": "app/controllers/",
+            "Tests\\": "tests/"
         }
     },
     "authors": [
