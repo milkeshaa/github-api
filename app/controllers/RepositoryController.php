@@ -3,11 +3,15 @@
 namespace App\Controllers;
 
 use App\Commands\Command as CLI;
+use App\Enums\Status;
 
 class RepositoryController
 {
     public static function list(string $username): string
     {
+        if (!$username) {
+            return json_encode(['status' => Status::FAILURE->value, 'message' => 'Username is required']);
+        }
         $data = CLI::list_repositories($username);
         $response = json_decode($data);
         $styled_response = ['username' => $username, 'repositories' => []];
