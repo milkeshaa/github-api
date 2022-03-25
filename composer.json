@@ -16,7 +16,8 @@
             "App\\Enums\\": "app/enums/",
             "App\\Traits\\": "app/traits/",
             "App\\Controllers\\": "app/controllers/",
-            "Tests\\": "tests/"
+            "Tests\\": "tests/",
+            "App\\Utils\\": "app/utils/"
         }
     },
     "authors": [

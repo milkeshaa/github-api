@@ -14,32 +14,8 @@
 require '../vendor/autoload.php';
 require '../bootstrap.php';
 
-header('Content-Type: application/json;charset=utf-8;');
-$response = [];
-switch($_SERVER['REQUEST_METHOD'])
-{
-    case 'GET': {
-        $uri = urldecode(
-            parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)
-        );
-        $username = htmlspecialchars($_GET['username']);
-        if (!$username) {
-            if (!isset($_ENV['GITHUB_USERNAME'])) {
-                die("Please provide the username (in env, or in URL)");
-            }
-            $username = $_ENV['GITHUB_USERNAME'];
-        }
-        if (preg_match('/^\/github\/repos$/', $uri)
-            || preg_match('/^\/github\/repos[?&username]/', $uri)) {
-            $response = \App\Controllers\RepositoryController::list($username);
-        } else {
-            http_response_code(404);
-        }
-        break;
-    }
-    default: {
-        http_response_code(404);
-    }
-}
+use App\Utils\Router;
 
-echo is_array($response) ? json_encode($response) : $response;
+header('Content-Type: application/json;charset=utf-8;');
+$router = new Router();
+echo $router->process();
